@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: timekeepingAPI_production
-  username: timekeepingAPI
+  username: postgres
   password: <%= ENV['TIMEKEEPINGAPI_DATABASE_PASSWORD'] %>
