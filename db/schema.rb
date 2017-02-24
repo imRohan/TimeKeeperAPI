@@ -16,8 +16,10 @@ ActiveRecord::Schema.define(version: 20170224204459) do
   enable_extension "plpgsql"
 
   create_table "time_entries", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "timecard_id"
+    t.datetime "time"
   end
 
   create_table "timecards", force: :cascade do |t|
