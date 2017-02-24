@@ -2,8 +2,8 @@ class Api::V1::TimecardsController < ApplicationController
   before_action :get_timecard, only: [:show, :update, :destroy]
 
   def index
-    @timecards = Timecard.all
-    render json: @timecards
+    @timecards = Timecard.all.includes(:time_entries)
+    render json: @timecards, include: 'time_entries'
   end
 
   def show
