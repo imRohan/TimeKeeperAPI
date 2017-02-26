@@ -3,7 +3,7 @@ class Api::V1::TimecardsController < ApplicationController
 
   def index
     @timecards = Timecard.all.includes(:time_entries)
-    render json: @timecards, include: 'time_entries'
+    render json: @timecards
   end
 
   def show
