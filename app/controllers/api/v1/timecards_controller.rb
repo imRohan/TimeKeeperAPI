@@ -29,6 +29,11 @@ class Api::V1::TimecardsController < ApplicationController
     end
   end
 
+  def destroy
+    @timecard.destroy
+    head 200
+  end
+
   private
 
   def get_timecard
@@ -37,7 +42,7 @@ class Api::V1::TimecardsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       timecard = Timecard.new
       timecard.errors.add(:id, "No Timecard for this ID.")
-      render_error(timecard, 404) and return
+      render_error(timecard, 422) and return
     end
   end
 
