@@ -30,4 +30,9 @@ class Api::V1::TimecardsControllerTest < ActionDispatch::IntegrationTest
     post "/api/v1/timecards", {format: 'json', timecard:{username: "rohan4", occurrence: Date.today.next_day(4)}}
     assert_response :unprocessable_entity
   end
+
+  test "Change Username for one timecard" do
+    patch "/api/v1/timecards/#{@timecard.id}", {format: 'json', timecard:{username: "derp", occurrence: Date.today.next_day(6)}}
+    assert_response :success
+  end
 end
