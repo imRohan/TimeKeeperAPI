@@ -13,12 +13,19 @@ class Api::V1::TimecardsController < ApplicationController
   def create
     timecard = Timecard.new(timecard_params)
 
-    
     if timecard.save
       render json: timecard, status: :created
     else
       timecard.errors.add(:id, "A timecard already exists for this date.")
       render_error(timecard, :unprocessable_entity)
+    end
+  end
+
+  def update
+    if @timecard.update_attributes(timecard_params)
+      render json: @timecard, status: :ok
+    else
+      render_error(@timecard, :unprocessable_entity)
     end
   end
 
