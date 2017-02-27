@@ -21,6 +21,11 @@ class Api::V1::TimeEntriesController < ApplicationController
     end
   end
 
+  def destroy
+    @time_entry.destroy
+    head 200
+  end
+
   private
 
   def time_entry_params
