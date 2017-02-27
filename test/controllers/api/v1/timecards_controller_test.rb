@@ -3,11 +3,31 @@ require 'json'
 
 class Api::V1::TimecardsControllerTest < ActionDispatch::IntegrationTest
 
+  def setup
+    @timecard = timecards(:timecard1)
+  end
+
   test "Should get valid list of timecards" do
     get "/api/v1/timecards"
     assert_response :success
     json_data = JSON.parse response.body
-    p json_data
     assert_equal 5, json_data.length
+  end
+
+  test "Show one timecard" do
+    get "/api/v1/timecards/#{@timecard.id}"
+    assert_response :success
+    json_data = JSON.parse response.body
+    assert_equal json_data['username'], "rohan1"
+  end
+
+  test "Create a new timecard" do
+    post "/api/v1/timecards", {format: 'json', timecard:{username: "rohan5", occurrence: Date.today.next_day(5)}}
+    assert_response :success
+  end
+
+  test "Create a dupe timecard failure" do
+    post "/api/v1/timecards", {format: 'json', timecard:{username: "rohan4", occurrence: Date.today.next_day(4)}}
+    assert_response :unprocessable_entity
   end
 end
