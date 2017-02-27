@@ -4,22 +4,8 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 
-timecard1:
-  username: <%= "rohan1" %>
-  occurrence: <%= Date.today %>
-
-timecard2:
-  username: <%= "rohan2" %>
-  occurrence: <%= Date.today.next_day(2) %>
-
-timecard3:
-  username: <%= "rohan3" %>
-  occurrence: <%= Date.today.next_day(3) %>
-
-timecard4:
-  username: <%= "rohan4" %>
-  occurrence: <%= Date.today.next_day(4) %>
-
-timecard5:
-  username: <%= "rohan4" %>
-  occurrence: <%= Date.today.next_day(4) %>
+<% 5.times do |i| %>
+timecard<%= i %>:
+  username: <%= "rohan#{i}" %>
+  occurrence: <%= Date.today.next_day(i) %>
+<% end %>
