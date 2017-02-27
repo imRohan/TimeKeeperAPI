@@ -10,6 +10,17 @@ class Api::V1::TimecardsController < ApplicationController
     render json: @timecard
   end
 
+  def create
+    timecard = Timecard.new(timecard_params)
+
+    
+    if timecard.save
+      render json: timecard, status: :created
+    else
+      render_error(timecard, :unprocessable_entity)
+    end
+  end
+
   private
 
   def get_timecard
@@ -20,5 +31,9 @@ class Api::V1::TimecardsController < ApplicationController
       timecard.errors.add(:id, "No Timecard for this ID.")
       render_error(timecard, 404) and return
     end
+  end
+
+  def timecard_params
+    params.require(:timecard).permit(:username, :occurrence)
   end
 end
