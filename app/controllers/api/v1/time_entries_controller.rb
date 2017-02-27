@@ -10,7 +10,22 @@ class Api::V1::TimeEntriesController < ApplicationController
     render json: @time_entry
   end
 
+  def create
+    time_entry = TimeEntry.new(time_entry_params)
+
+    if time_entry.save
+      render json: time_entry, status: :created
+    else
+      time_entry.errors.add(:id, "The Timecard for this entry does not exist")
+      render_error(time_entry, :unprocessable_entity)
+    end
+  end
+
   private
+
+  def time_entry_params
+    params.require(:time_entry).permit(:time, :timecard_id)
+  end
 
   def get_time_entry
     begin 
