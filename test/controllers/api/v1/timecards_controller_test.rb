@@ -19,6 +19,7 @@ class Api::V1::TimecardsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     json_data = JSON.parse response.body
     assert_equal json_data['username'], "rohan1"
+    assert_equal json_data['time_entries'].size, 5
   end
 
   test "Create a new timecard" do
