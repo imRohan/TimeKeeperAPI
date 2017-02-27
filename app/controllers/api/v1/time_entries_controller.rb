@@ -21,6 +21,14 @@ class Api::V1::TimeEntriesController < ApplicationController
     end
   end
 
+  def update
+    if @time_entry.update_attributes(time_entry_params)
+      render json: @time_entry, status: :ok
+    else
+      render_error(@time_entry, :unprocessable_entity)
+    end
+  end
+
   def destroy
     @time_entry.destroy
     head 200
