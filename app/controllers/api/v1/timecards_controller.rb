@@ -17,6 +17,7 @@ class Api::V1::TimecardsController < ApplicationController
     if timecard.save
       render json: timecard, status: :created
     else
+      timecard.errors.add(:id, "A timecard already exists for this date.")
       render_error(timecard, :unprocessable_entity)
     end
   end
