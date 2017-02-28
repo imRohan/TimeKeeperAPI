@@ -21,9 +21,7 @@ To run Timekeeper, simply start the rails server
 Tests written using MINItest can be run by executing
 
 `rails test`
-  
-And navigate to one of the endpoints below:
-
+ 
 ### Timekeeper API Spec
 
 #### List all time cards
